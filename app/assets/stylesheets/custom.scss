@@ -105,3 +105,17 @@ input {
     color: $state-danger-text;
   }
 }
+
+.user-profile-detail {
+  span {
+    display: inline-block;
+  }
+  .index {
+    width: 6em;
+    text-align: right;
+  }
+  .value {
+    width: 160px;
+    text-align: left;
+  }
+}

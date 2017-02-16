@@ -1,7 +1,16 @@
 <h1>
   <%= gravatar_for @user %>
   <%= @user.name %>
-  (<%= link_to "edit" , edit_user_path(@user) %>)
+  <% if its_me?(@user) %>
+    (<%= link_to "edit" , edit_user_path(@user) %>)
+  <% end %>
 </h1>
-<p class="bg-success text-center">　　性別：　　　　　　　　　　　<%=@user.gender%>　　　　　　</p>
-<p class="bg-warning text-center">生年月日：　　　　　　　　　　　<%=@user.birthday.strftime("%Y年%m月%d日")%></p>
+<div class="user-profile-detail">
+  <% if !@user.gender.nil? %>
+    <p class="bg-success text-center"><span class="index">性別：</span><span class="value"><%=@user.gender%></span></p>
+  <% end %>
+  <% if !@user.birthday.nil? %>
+    <p class="bg-warning text-center"><span class="index">生年月日：</span><span class="value"><%=@user.birthday.strftime("%Y年%m月%d日")%></span></p>
+  <% end %>
+</div>
+

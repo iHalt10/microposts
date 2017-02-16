@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :update]
+  before_action :correct_user, only: [:edit, :update]
+
   def show # 追加
-   @user = User.find(params[:id])
   end
   
   def new
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
     #@user.age =(Date.today.strftime("%Y%m%d").to_i - @user.birthday.strftime("%Y%m%d").to_i) / 10000
     if @user.update(update_user_params)
       # 保存に成功した場合はトップページへリダイレクト
-      redirect_to root_path , notice: '編集しました'
+      redirect_to @user , notice: '編集しました'
     else
       # 保存に失敗した場合は編集画面へ戻す
       render 'edit'
@@ -32,16 +33,24 @@ class UsersController < ApplicationController
   end
   
   private
+
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
   
-  private
   def update_user_params
+    # p = user_param
+    # p.permit(:gender, :birthday)
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :gender, :birthday)
   end
   
   def set_user
     @user = User.find(params[:id])
+  end
+  
+  def correct_user
+    # current_user = 私
+    # @user =編集対象のユーザー
+    redirect_to root_url if current_user != @user
   end
 end
