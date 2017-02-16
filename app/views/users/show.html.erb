@@ -1,4 +1,7 @@
 <h1>
   <%= gravatar_for @user %>
   <%= @user.name %>
+  (<%= link_to "edit" , edit_user_path(@user) %>)
 </h1>
+<p class="bg-success text-center">　　性別：　　　　　　　　　　　<%=@user.gender%>　　　　　　</p>
+<p class="bg-warning text-center">生年月日：　　　　　　　　　　　<%=@user.birthday.strftime("%Y年%m月%d日")%></p>
