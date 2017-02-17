@@ -1,9 +1,6 @@
 <h1>
   <%= gravatar_for @user %>
   <%= @user.name %>
-  <% if its_me?(@user) %>
-    (<%= link_to "edit" , edit_user_path(@user) %>)
-  <% end %>
 </h1>
 <div class="user-profile-detail">
   <% if !@user.gender.nil? %>
