@@ -9,6 +9,7 @@
   </aside>
   
   <div class="col-md-8">
+    <%= render 'follow_form' if logged_in? %>
     <div class="user-profile-detail">
       <% if !@user.gender.nil? %>
         <p class="bg-success text-center"><span class="index">性別：</span><span class="value"><%=@user.gender%></span></p>
