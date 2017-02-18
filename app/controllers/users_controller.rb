@@ -2,7 +2,9 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :correct_user, only: [:edit, :update]
 
-  def show # 追加
+  def show
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.order(created_at: :desc)
   end
   
   def new
@@ -22,7 +24,6 @@ class UsersController < ApplicationController
   end
   
   def update
-    #@user.age =(Date.today.strftime("%Y%m%d").to_i - @user.birthday.strftime("%Y%m%d").to_i) / 10000
     if @user.update(update_user_params)
       # 保存に成功した場合はトップページへリダイレクト
       redirect_to @user , notice: '編集しました'
