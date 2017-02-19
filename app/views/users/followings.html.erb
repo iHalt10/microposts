@@ -1,0 +1,12 @@
+<h1>followings</h1>
+<% if @user.following_users.count!=0%>
+  <% @followings.each do |following| %>
+    <li class="list-unstyled">
+      <%= link_to gravatar_for(following, size: 50), following %>
+      <%= link_to following.name, following %>
+    </li>
+    <br><br>
+  <% end %>
+<%else%>
+  <h2 class="bg-danger">followしていません</h2>
+<%end%>

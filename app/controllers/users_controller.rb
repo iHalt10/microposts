@@ -33,8 +33,17 @@ class UsersController < ApplicationController
     end
   end
   
+  def followings
+    @user = User.find(params[:id])
+    @followings = @user.following_users.order(created_at: :desc)
+  end
+  
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.follower_users.order(created_at: :desc)
+  end
+  
   private
-
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end

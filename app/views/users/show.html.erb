@@ -3,7 +3,11 @@
     <section class="user_info">
       <h1>
         <%= gravatar_for @user %>
-        <%= @user.name %>
+        <ul class="list-unstyled">
+          <li><%= @user.name %></li>
+          <li><%= link_to "#{@user.following_users.count} followings", followings_user_path(@user) %></li>
+          <li><%= link_to "#{@user.follower_users.count} followers", followers_user_path(@user) %></li>
+        </ul>
       </h1>
     </section>
   </aside>
