@@ -1,0 +1,33 @@
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <ul class="list-unstyled">
+          <li><%= @user.name %></li>
+          <li><%= link_to "#{@user.following_users.count} followings", followings_user_path(@user) %></li>
+          <li><%= link_to "#{@user.follower_users.count} followers", followers_user_path(@user) %></li>
+        </ul>
+      </h1>
+    </section>
+  </aside>
+  
+  <div class="col-md-8">
+    <%= render 'follow_form' if logged_in? %>
+    <div class="user-profile-detail">
+      <% if !@user.gender.nil? %>
+        <p class="bg-success text-center"><span class="index">性別：</span><span class="value"><%=@user.gender%></span></p>
+      <% end %>
+      <% if !@user.birthday.nil? %>
+        <p class="bg-warning text-center"><span class="index">生年月日：</span><span class="value"><%=@user.birthday.strftime("%Y年%m月%d日")%></span></p>
+        <p class="bg-info text-center"><span class="index">年齢：</span><span class="value"><%=(Date.today.strftime("%Y%m%d").to_i - @user.birthday.strftime("%Y%m%d").to_i) / 10000%></span></p>
+      <% end %>
+    </div>
+    <% if @user.microposts.any? %>
+      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+      <ol class="microposts">
+        <%= render @microposts %>
+      </ol>
+    <% end %>
+  </div>
+</div>
